@@ -228,8 +228,18 @@ app.get('/reviews', async (req, res) => {
 
     res.json(reviews);
 });
+/*
+Executed (default): SELECT `Review`.`id`, `Review`.`bookId`, `Review`.`reviewerId`, `Review`.`content`, `Review`.`date`, `Review`.`createdAt`, `Review`.`updatedAt`, `Review`.`BookId`, `Review`.`ReviewerId`, `Reviewer`.`id` AS `Reviewer.id`, `Reviewer`.`firstName` AS `Reviewer.firstName`, `Reviewer`.`lastName` AS `Reviewer.lastName` 
+FROM `Reviews` AS `Review` INNER JOIN `Reviewers` AS `Reviewer` ON `Review`.`ReviewerId` = `Reviewer`.`id` 
+AND `Reviewer`.`firstName` = 'Daisy' AND `Reviewer`.`lastName` = 'Herzog'; 
+Elapsed time: 8ms
 
-
+*/
+/* WITH INDEX:
+Executed (default): SELECT `Review`.`id`, `Review`.`bookId`, `Review`.`reviewerId`, `Review`.`content`, `Review`.`date`, `Review`.`createdAt`, `Review`.`updatedAt`, `Review`.`BookId`, `Review`.`ReviewerId`, `Reviewer`.`id` AS `Reviewer.id`, `Reviewer`.`firstName` AS `Reviewer.firstName`, `Reviewer`.`lastName` AS `Reviewer.lastName` FROM `Reviews` AS `Review` INNER JOIN `Reviewers` AS `Reviewer` ON `Review`.`ReviewerId` = `Reviewer`.`id` AND `Reviewer`.`
+firstName` = 'Daisy' AND `Reviewer`.`lastName` = 'Herzog'; Elapsed time: 7ms
+*/
+// same speed...
 
 // Root route - DO NOT MODIFY
 app.get('/', (req, res) => {
